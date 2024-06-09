@@ -353,12 +353,6 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/profile", async (req, res) => {
-    //   const get = req.body;
-    //   const result = await profileInfoCollection.find(get).toArray();
-    //   res.send(result);
-    // });
-
   //get profile by email
     app.get("/profile/:email", async (req, res) => {
       const email = req.params.email;
