@@ -84,6 +84,11 @@ async function run() {
       .db("totaltools_manufacturing")
       .collection("profileInfo");
 
+    //for sendMessage
+    const contactusCollection = client
+      .db("totaltools_manufacturing")
+      .collection("contactus");
+
     //............................all collections ends here...........................
 
 
@@ -244,7 +249,7 @@ async function run() {
 
 
     // delete user
-    app.delete("/users/:email", verifyJWT, verifyAdmin, async (req, res) => {
+    app.delete("/users/:email", verifyJWT, verifyAdmin, async (req, res)  => {
       const email = req.params.email;
       const filter = { email: email };
       const result = await usersCollection.deleteOne(filter);
@@ -378,6 +383,14 @@ async function run() {
       res.send(result);
     });
  //-------------profile api end-------------------------------------
+
+//------------------------Contact us send message---------------------------------
+app.post("/contactus", verifyJWT, async(req, res) => {
+         const newContact = req.body;
+         const result = await contactusCollection.insertOne(newContact);
+         res.send(result);
+});
+
 
   } 
   finally {
